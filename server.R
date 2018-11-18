@@ -191,4 +191,44 @@ shinyServer(function(input, output, session) {
     
   })
   
+  ##### BDM 1D
+  observeEvent(input$blockSize1D, {
+    updateSliderInput(session,
+                      "blockOverlap",
+                      max = input$blockSize1D - 1)
+  })
+  
+  observeEvent(input$insertString, {
+    updateSliderInput(session,
+                      "nReduced",
+                      max = nchar(input$insertString) - 2)
+  })
+  
+  output$origStr <- renderText({
+    
+    input$evalStringButton
+    isolate({
+      paste0("Original string = ", input$insertString)
+      
+    })
+    
+  })
+  
+  output$mutateStr <- renderText({
+    
+    input$evalStringButton
+    isolate({
+      paste0("Reduced string with minimal algorithmic information loss = ", 
+             simultaneousAttackOnString(input$insertString, 
+                                        blockSize= input$blockSize1D, 
+                                        offset = (input$blockSize1D - input$blockOverlap), 
+                                        input$alphabet, 
+                                        input$nReduced, 
+                                        FALSE)
+      )
+      
+    })
+    
+  })
+  
 })
