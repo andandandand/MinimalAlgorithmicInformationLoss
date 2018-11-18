@@ -154,11 +154,31 @@ shinyUI(
                          br(),
                          
                          fluidRow(
-                           column(width=5
+                           column(width=5,
+                                  br(),
+                                  
+                                  h3("Original String", align="center"),
+                                  
+                                  br(),
+                                  
+                                  div(p(textOutput(outputId = "origStr")),
+                                      style = "font-size:120%",
+                                      align = "center")
                                   ),
-                           column(width=5)
+                                  
+                           column(width=5, 
+                                  
+                                  br(),
+                                  
+                                  h3("Reduced String", align="center"),
+                                  
+                                  br(),
+                                  
+                                  div(p(textOutput(outputId = "mutateStr")),
+                                      style = "font-size:120%",
+                                      align = "center"))
                          )
-        
+                         
       )  
     )
    )
